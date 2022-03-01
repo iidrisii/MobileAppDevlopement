@@ -13,9 +13,9 @@ function App()
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Signup" component={SignupScreen} />
-        <Stack.Screen name="MainApp" component={MainAppScreen} />
+        <Stack.Screen name = "Login" component={LoginScreen} />
+        <Stack.Screen name = "Signup" component={SignupScreen} />
+        <Stack.Screen name = "MainApp" component={MainAppScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
