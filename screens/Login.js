@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'react-native';
-import { ScrollView, TextInput } from 'react-native-gesture-handler';
+import { Button, ScrollView, TextInput } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class LoginScreen extends Component
@@ -18,7 +17,6 @@ class LoginScreen extends Component
 
     login = async () => 
     {
-
         //Validation here...
 
         return fetch("http://localhost:3333/api/1.0.0/login", 
@@ -47,7 +45,8 @@ class LoginScreen extends Component
         {
                 console.log(responseJson);
                 await AsyncStorage.setItem('@session_token', responseJson.token);
-                this.props.navigation.navigate("Home");
+                await AsyncStorage.setItem('@user_id', responseJson.id);
+                this.props.navigation.navigate("MainApp");
         })
         .catch((error) => 
         {
