@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Button, ScrollView, TextInput } from 'react-native';
+import { Button, ScrollView, TextInput, View, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Constants from 'expo-constants';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 class LoginScreen extends Component
 {
@@ -46,7 +48,7 @@ class LoginScreen extends Component
                 console.log(responseJson);
                 await AsyncStorage.setItem('@session_token', responseJson.token);
                 await AsyncStorage.setItem('@user_id', responseJson.id);
-                this.props.navigation.navigate("MainApp");
+                this.props.navigation.navigate("EverythingElse");
         })
         .catch((error) => 
         {
@@ -57,32 +59,74 @@ class LoginScreen extends Component
     render()
     {
         return (
-            <ScrollView>
-                <TextInput
-                    placeholder="Enter your email..."
-                    onChangeText={(email) => this.setState({email})}
-                    value={this.state.email}
-                    style={{padding:5, borderWidth:1, margin:5}}
-                />
-                <TextInput
-                    placeholder="Enter your password..."
-                    onChangeText={(password) => this.setState({password})}
-                    value={this.state.password}
-                    secureTextEntry
-                    style={{padding:5, borderWidth:1, margin:5}}
-                />
-                <Button
-                    title="Login"
-                    onPress={() => this.login()}
-                />
-                <Button
-                    title="Don't have an account?"
-                    color="darkblue"
-                    onPress={() => this.props.navigation.navigate("Signup")}
-                />
-            </ScrollView>
+            <SafeAreaView style={styles.container}>
+                <View>
+                    <ScrollView>
+                        <TextInput style={styles.input}
+                            placeholder="Enter your email..."
+                            onChangeText={(email) => this.setState({email})}
+                            value={this.state.email}
+                            style={{padding:5, borderWidth:1, margin:5}}
+                        />
+                        <TextInput style={styles.input}
+                            placeholder="Enter your password..."
+                            onChangeText={(password) => this.setState({password})}
+                            value={this.state.password}
+                            secureTextEntry
+                            style={{padding:5, borderWidth:1, margin:5}}
+                        />
+                        <Button
+                            title="Login"
+                            onPress={() => this.login()}
+                            /*style = {{backgroundColor: 'yellow',
+                            height: 40,
+                            borderRadius: 20,
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            fontSize: 12,
+                            fontWeight: '500',
+                            textTransform: 'uppercase',}} */
+                        />
+                        <Button
+                            title="Don't have an account?"
+                            color="darkblue"
+                            onPress={() => this.props.navigation.navigate("Signup")}
+                        /> 
+                    </ScrollView>
+                </View>
+            </SafeAreaView>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    container: 
+    {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: "center",
+      paddingTop: Constants.statusBarHeight,
+      backgroundColor: '#87cefa',
+      padding: 80,
+    },
+    button:
+    {
+        backgroundColor: 'yellow',
+        height: 40,
+        borderRadius: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontSize: 12,
+        fontWeight: '500',
+        textTransform: 'uppercase',
+    },
+    input: 
+    {
+        height: 40,
+        margin: 12,
+        borderWidth: 1,
+        padding: 10,
+    },
+  }); 
 
 export default LoginScreen;

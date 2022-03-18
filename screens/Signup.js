@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Button, ScrollView, TextInput } from 'react-native';
+import { Button, ScrollView, TextInput, StyleSheet } from 'react-native';
+import Constants from 'expo-constants';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 class SignupScreen extends Component
 {
@@ -55,39 +57,71 @@ class SignupScreen extends Component
     render()
     {
         return (
-            <ScrollView>
-                <TextInput
-                    placeholder="Enter your first name..."
-                    onChangeText={(first_name) => this.setState({first_name})}
-                    value={this.state.first_name}
-                    style={{padding:5, borderWidth:1, margin:5}}
-                />
-                <TextInput
-                    placeholder="Enter your last name..."
-                    onChangeText={(last_name) => this.setState({last_name})}
-                    value={this.state.last_name}
-                    style={{padding:5, borderWidth:1, margin:5}}
-                />
-                <TextInput
-                    placeholder="Enter your email..."
-                    onChangeText={(email) => this.setState({email})}
-                    value={this.state.email}
-                    style={{padding:5, borderWidth:1, margin:5}}
-                />
-                <TextInput
-                    placeholder="Enter your password..."
-                    onChangeText={(password) => this.setState({password})}
-                    value={this.state.password}
-                    secureTextEntry
-                    style={{padding:5, borderWidth:1, margin:5}}
-                />
-                <Button
-                    title="Create an account"
-                    onPress={() => this.signup()}
-                />
-            </ScrollView>
+            <SafeAreaView style={styles.container}>
+                    <ScrollView >
+                        <TextInput style={styles.input}
+                            placeholder="Enter your first name..."
+                            onChangeText={(first_name) => this.setState({first_name})}
+                            value={this.state.first_name}
+                            //style={{padding:5, borderWidth:1, margin:5}}
+                        />
+                        <TextInput style={styles.input}
+                            placeholder="Enter your last name..."
+                            onChangeText={(last_name) => this.setState({last_name})}
+                            value={this.state.last_name}
+                            //style={{padding:5, borderWidth:1, margin:5}}
+                        />
+                        <TextInput style={styles.input}
+                            placeholder="Enter your email..."
+                            onChangeText={(email) => this.setState({email})}
+                            value={this.state.email}
+                            //style={{padding:5, borderWidth:1, margin:5}}
+                        />
+                        <TextInput style={styles.input}
+                            placeholder="Enter your password..."
+                            onChangeText={(password) => this.setState({password})}
+                            value={this.state.password}
+                            secureTextEntry
+                            //style={{padding:5, borderWidth:1, margin:5}}
+                        />
+                        <Button
+                            title="Create an account"
+                            onPress={() => this.signup()}
+                        />
+                    </ScrollView>
+            </SafeAreaView>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    container: 
+    {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: "center",
+      paddingTop: Constants.statusBarHeight,
+      backgroundColor: '#87cefa',
+      paddingTop: 250,
+    },
+    button:
+    {
+        backgroundColor: 'yellow',
+        height: 40,
+        borderRadius: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontSize: 12,
+        fontWeight: '500',
+        textTransform: 'uppercase',
+    },
+    input: 
+    {
+        height: 40,
+        margin: 12,
+        borderWidth: 1,
+        padding: 10,
+    },
+  }); 
 
 export default SignupScreen;
